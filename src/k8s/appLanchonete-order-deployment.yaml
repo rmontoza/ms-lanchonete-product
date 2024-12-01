@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-lanchonete-deployment
+  name: ms-lanchonete-product-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: app-lanchonete-deployment
+      app: ms-lanchonete-product-deployment
   template:
     metadata:
       labels:
-        app: app-lanchonete-deployment
+        app: ms-lanchonete-product-deployment
     spec:
       containers:
-      - name: app-lanchonete
-        image: rmontoza/applanchonete:latest
+      - name: ms-lanchonete-product
+        image: rmontoza/mslanchoneteproduct:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
@@ -23,12 +23,12 @@ spec:
         - name: MONGODB_URI
           valueFrom:
             configMapKeyRef:
-              name: app-lanchonete-config
+              name: ms-lanchonete-product-config
               key: MONGODB_URI
         volumeMounts:
-        - name: app-lanchonete-volume
+        - name: ms-lanchonete-product-volume
           mountPath: /app
         ##command: ["/start-web.sh"]  # Substitua isso pelo comando de início apropriado, se necessário
       volumes:
-      - name: app-lanchonete-volume
+      - name: ms-lanchonete-product-volume
         emptyDir: {}
